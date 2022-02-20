@@ -38,14 +38,13 @@ namespace MedsoftExercise1
             this.tbFullName = new System.Windows.Forms.TextBox();
             this.tbPhone = new System.Windows.Forms.TextBox();
             this.tbAddress = new System.Windows.Forms.TextBox();
-            this.rbFemale = new System.Windows.Forms.RadioButton();
-            this.rbMale = new System.Windows.Forms.RadioButton();
             this.labelGender = new System.Windows.Forms.Label();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.errorFullName = new System.Windows.Forms.ErrorProvider(this.components);
             this.errorPhone = new System.Windows.Forms.ErrorProvider(this.components);
             this.errorDob = new System.Windows.Forms.ErrorProvider(this.components);
+            this.cbGender = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorFullName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorPhone)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorDob)).BeginInit();
@@ -74,7 +73,7 @@ namespace MedsoftExercise1
             this.dtpDob.Location = new System.Drawing.Point(185, 180);
             this.dtpDob.Name = "dtpDob";
             this.dtpDob.Size = new System.Drawing.Size(233, 23);
-            this.dtpDob.TabIndex = 2;
+            this.dtpDob.TabIndex = 3;
             this.dtpDob.Validating += new System.ComponentModel.CancelEventHandler(this.dtpDob_Validating);
             // 
             // labelPhone
@@ -108,7 +107,7 @@ namespace MedsoftExercise1
             this.tbPhone.Location = new System.Drawing.Point(185, 80);
             this.tbPhone.Name = "tbPhone";
             this.tbPhone.Size = new System.Drawing.Size(233, 23);
-            this.tbPhone.TabIndex = 6;
+            this.tbPhone.TabIndex = 1;
             this.tbPhone.Validating += new System.ComponentModel.CancelEventHandler(this.tbPhone_Validating);
             // 
             // tbAddress
@@ -116,29 +115,7 @@ namespace MedsoftExercise1
             this.tbAddress.Location = new System.Drawing.Point(185, 130);
             this.tbAddress.Name = "tbAddress";
             this.tbAddress.Size = new System.Drawing.Size(233, 23);
-            this.tbAddress.TabIndex = 7;
-            // 
-            // rbFemale
-            // 
-            this.rbFemale.AutoSize = true;
-            this.rbFemale.Checked = true;
-            this.rbFemale.Location = new System.Drawing.Point(185, 230);
-            this.rbFemale.Name = "rbFemale";
-            this.rbFemale.Size = new System.Drawing.Size(110, 19);
-            this.rbFemale.TabIndex = 8;
-            this.rbFemale.TabStop = true;
-            this.rbFemale.Text = "მდედრობითი";
-            this.rbFemale.UseVisualStyleBackColor = true;
-            // 
-            // rbMale
-            // 
-            this.rbMale.AutoSize = true;
-            this.rbMale.Location = new System.Drawing.Point(323, 230);
-            this.rbMale.Name = "rbMale";
-            this.rbMale.Size = new System.Drawing.Size(95, 19);
-            this.rbMale.TabIndex = 9;
-            this.rbMale.Text = "მამრობითი";
-            this.rbMale.UseVisualStyleBackColor = true;
+            this.tbAddress.TabIndex = 2;
             // 
             // labelGender
             // 
@@ -154,7 +131,7 @@ namespace MedsoftExercise1
             this.btnAdd.Location = new System.Drawing.Point(316, 296);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
-            this.btnAdd.TabIndex = 11;
+            this.btnAdd.TabIndex = 5;
             this.btnAdd.Text = "დამატება";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
@@ -165,7 +142,7 @@ namespace MedsoftExercise1
             this.btnCancel.Location = new System.Drawing.Point(397, 296);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 12;
+            this.btnCancel.TabIndex = 6;
             this.btnCancel.Text = "გაუქმება";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
@@ -181,17 +158,24 @@ namespace MedsoftExercise1
             // 
             this.errorDob.ContainerControl = this;
             // 
+            // cbGender
+            // 
+            this.cbGender.FormattingEnabled = true;
+            this.cbGender.Location = new System.Drawing.Point(185, 230);
+            this.cbGender.Name = "cbGender";
+            this.cbGender.Size = new System.Drawing.Size(121, 23);
+            this.cbGender.TabIndex = 4;
+            // 
             // AddPatientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(484, 331);
+            this.Controls.Add(this.cbGender);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.labelGender);
-            this.Controls.Add(this.rbMale);
-            this.Controls.Add(this.rbFemale);
             this.Controls.Add(this.tbAddress);
             this.Controls.Add(this.tbPhone);
             this.Controls.Add(this.tbFullName);
@@ -223,13 +207,12 @@ namespace MedsoftExercise1
         private System.Windows.Forms.TextBox tbFullName;
         private System.Windows.Forms.TextBox tbPhone;
         private System.Windows.Forms.TextBox tbAddress;
-        private System.Windows.Forms.RadioButton rbFemale;
-        private System.Windows.Forms.RadioButton rbMale;
         private System.Windows.Forms.Label labelGender;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.ErrorProvider errorFullName;
         private System.Windows.Forms.ErrorProvider errorPhone;
         private System.Windows.Forms.ErrorProvider errorDob;
+        private System.Windows.Forms.ComboBox cbGender;
     }
 }

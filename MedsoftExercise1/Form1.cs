@@ -13,7 +13,6 @@ namespace MedsoftExercise1
         public MainForm()
         {
             InitializeComponent();
-
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -32,6 +31,7 @@ namespace MedsoftExercise1
                 }
             }
         }
+
         public void LoadPatients()
         {
             List<string> headers = new List<string> { "ID", "პაციენტის გვარი სახელი", "დაბადების თარიღი", "სქესი", "მობილურის ნომერი", "მისამართი" };
@@ -53,10 +53,12 @@ namespace MedsoftExercise1
             addPatientForm.ShowDialog();
 
         }
+
         private void tsbDelete_Click(object sender, EventArgs e)
         {
             Delete();
         }
+
         private void Delete()
         {
             DialogResult result = MessageBox.Show("გსურთ მონიშნული ჩანაწერის წაშლა?", "პაციენტის წაშლა", MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2);

@@ -1,5 +1,7 @@
-﻿using MedsoftExercise1.Repository;
+﻿using MedsoftExercise1.DTO;
+using MedsoftExercise1.Repository;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
@@ -11,23 +13,39 @@ namespace MedsoftExercise1
     public partial class AddPatientForm : Form
     {
         private MainForm _form;
-        private bool _checkAddOrEdit;
         private int _id;
+        private GenderRepository _genderRep;
         public AddPatientForm(MainForm form)
         {
             InitializeComponent();
             _form = form;
-            _checkAddOrEdit = true;
             btnAdd.Enabled = false;
+            _genderRep = new GenderRepository();
+            _id = 0;
+            FillComboBox();
         }
+
         public AddPatientForm(MainForm form, DataGridViewRow row)
         {
             InitializeComponent();
             _form = form;
-            FillTextBoxes(row);
+            _genderRep = new GenderRepository();
             btnAdd.Text = "შეცვლა";
-            _checkAddOrEdit = false;
             this.Text = "პაციენტის რედაქტირება";
+            FillTextBoxes(row);
+            FillComboBox(row);
+        }
+
+        private void FillComboBox(DataGridViewRow row = null)
+        {
+            cbGender.DataSource = _genderRep.GetAllObjects(new Gender());
+
+            cbGender.DisplayMember = "GenderName";
+            cbGender.ValueMember = "GenderID";
+            if (row!=null)
+            {
+                cbGender.SelectedValue = _genderRep.GetGenderID(row.Cells[3].Value.ToString());
+            }
         }
 
         private void FillTextBoxes(DataGridViewRow row)
@@ -35,20 +53,14 @@ namespace MedsoftExercise1
             _id = (int)row.Cells[0].Value;
             tbFullName.Text = row.Cells[1].Value.ToString();
             dtpDob.Value = Convert.ToDateTime(row.Cells[2].Value);
+            cbGender.SelectedValue = _genderRep.GetGenderID(row.Cells[3].Value.ToString());
             tbPhone.Text = string.Join("", row.Cells[4].Value.ToString().Split("-"));
             tbAddress.Text = row.Cells[5].Value.ToString();
-            rbMale.Checked = row.Cells[3].Value.ToString().Equals("მამრობითი") ? true : false;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (_checkAddOrEdit)
-            {
-                Add();
-            }
-            else
-                Edit();
-
+            AddOrEdit();
             this.Close();
             _form.LoadPatients();
         }
@@ -112,7 +124,6 @@ namespace MedsoftExercise1
             }
             else
                 btnAdd.Enabled = true;
-
         }
 
         private bool PhoneNumberValidation(string text)
@@ -131,36 +142,10 @@ namespace MedsoftExercise1
             else
                 btnAdd.Enabled = true;
         }
-        private void Add()
+        private void AddOrEdit()
         {
             PatientRepository repository = new PatientRepository();
-            repository.Insert(new SqlParameter()
-            {
-                ParameterName = "@FullName",
-                Value = tbFullName.Text
-            }, new SqlParameter()
-            {
-                ParameterName = "@Dob",
-                Value = dtpDob.Value
-            }, new SqlParameter()
-            {
-                ParameterName = "@GenderName",
-                Value = rbMale.Checked ? "მამრობითი" : "მდედრობითი"
-            }, new SqlParameter()
-            {
-                ParameterName = "@Phone",
-                Value = repository.FormatPhoneNUmber(tbPhone.Text)
-            }, new SqlParameter()
-            {
-                ParameterName = "@Address",
-                Value = tbAddress.Text
-            });
-            DialogResult = DialogResult.OK;
-        }
-        private void Edit()
-        {
-            PatientRepository repository = new PatientRepository();
-            repository.Update(new SqlParameter()
+            repository.InsertOrUpdate(new SqlParameter()
             {
                 ParameterName = "@ID",
                 Value = _id
@@ -175,7 +160,7 @@ namespace MedsoftExercise1
             }, new SqlParameter()
             {
                 ParameterName = "@GenderName",
-                Value = rbMale.Checked ? "მამრობითი" : "მდედრობითი"
+                Value = _genderRep.GetGender((int)cbGender.SelectedValue)
             }, new SqlParameter()
             {
                 ParameterName = "@Phone",

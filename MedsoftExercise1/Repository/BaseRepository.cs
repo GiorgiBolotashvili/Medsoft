@@ -9,7 +9,6 @@ namespace MedsoftExercise1.Repository
     {
         protected readonly string connectionString = "Server = .\\SQLEXPRESS; Database = MedsoftDT; integrated security = true;";
 
-
         public DataTable GetAllObjects<T>(T type )
         {
             DataTable dataTable = new DataTable();
@@ -24,6 +23,7 @@ namespace MedsoftExercise1.Repository
             }
             return dataTable;
         }
+
         public void Delete<T>(T type, int id)
         {
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -38,6 +38,7 @@ namespace MedsoftExercise1.Repository
                 command.ExecuteScalar();
             }
         }
+
         public string FormatPhoneNUmber(string number)
         {
             if (String.IsNullOrWhiteSpace(number))
@@ -50,6 +51,5 @@ namespace MedsoftExercise1.Repository
             }
             return string.Join("-", arr);
         }
-
     }
 }
