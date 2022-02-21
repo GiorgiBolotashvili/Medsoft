@@ -160,7 +160,7 @@ namespace MedsoftExercise1
             }, new SqlParameter()
             {
                 ParameterName = "@GenderName",
-                Value = _genderRep.GetGender((int)cbGender.SelectedValue)
+                Value = _genderRep.GetGenderName((int)cbGender.SelectedValue)
             }, new SqlParameter()
             {
                 ParameterName = "@Phone",

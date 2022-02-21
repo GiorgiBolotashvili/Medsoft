@@ -23,12 +23,12 @@ namespace MedsoftExercise1.Repository
             } 
         }
 
-        public string GetGender(int id)
+        public string GetGenderName(int id)
         {
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 SqlCommand command = con.CreateCommand();
-                command.CommandText = "GetGender_sp";
+                command.CommandText = "GetGenderName_sp";
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.Add(new SqlParameter { ParameterName = "@GenderID", Value = id });
                 if (command.Connection.State != ConnectionState.Open)
